@@ -61,11 +61,12 @@ class MainComponent extends Component {
       />
     }
     const DishWithId =({match})=>{
+
       var { dishId } = match.params;
-      dishId = parseInt(dishId,10);
+      // dishId = parseInt(dishId,10);
       return(
         <DishDetail
-          dish={this.props.dishes.dishes.filter((dish) => dish.id === dishId)[0]}
+          dish={this.props.dishes.dishes.filter((dish) => dish._id === dishId)[0]}
           isLoading = { this.props.dishes.isLoading }
           errMess = { this.props.dishes.errMess}
           comments = {this.props.comments.comments.filter((comment) => comment.dishId === dishId)}

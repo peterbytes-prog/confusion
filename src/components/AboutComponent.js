@@ -15,7 +15,7 @@ const RenderLeader = ({leader}) => {
           exitTransform:'scale(0.5) translateY(-50%)'
         }}
       >
-        <Media tag="li" key={leader.id} className="col-12 mt-5 d-flex">
+        <Media tag="li" key={leader._id} className="col-12 mt-5 d-flex">
           <Media left middle>
               <Media object src={baseUrl+leader.image} alt={leader.name}/>
           </Media>
@@ -33,7 +33,7 @@ function About(props) {
 
     const leaders = props.leaders.map((leader) => {
         return (
-            <RenderLeader key={leader.id} leader={leader} isLoading={props.leadersLoading} errMess={props.leadersErrMess} />
+            <RenderLeader key={leader._id} leader={leader} isLoading={props.leadersLoading} errMess={props.leadersErrMess} />
         );
     });
 

@@ -170,7 +170,7 @@ function RenderComments({comments,postComment, dishId }) {
       const date = new Date(comment.date).toDateString();
       return(
         <Fade in>
-        <li key={comment.id}>
+        <li key={comment._id}>
           <p>{comment.comment}</p>
           <p>-- {comment.author}, {date}</p>
         </li>
@@ -249,7 +249,7 @@ const  DishDetail = (props) => {
                 <RenderComments
                   comments = { comments }
                   postComment = { props.postComment}
-                  dishId = {props.dish.id }
+                  dishId = {props.dish._id }
                 />
               </Col>
             </Row>
