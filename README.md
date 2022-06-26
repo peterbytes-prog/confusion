@@ -2,11 +2,19 @@
   <h1>Confusion Resturant App (Front End)</h1>
   <div>
     <h2>Demo</h2>
+<<<<<<< HEAD
     <img src="./demo/home.png" />
     <img src="./demo/menu.png" />
     <img src="./demo/login.png" />
     <img src="./demo/contactus.png" />
     <img src="./demo/detail.png" />
+=======
+    ![home page](./demo/home.png)
+    ![menu page](./demo/menu.png)
+    ![login page](./demo/login.png)
+    ![contact page](./demo/contactus.png)
+    ![detail page](./demo/detail.png)
+>>>>>>> 32126d1d18ca75ba21960e89fccb3db33c06faec
   </div>
 
   <section >
