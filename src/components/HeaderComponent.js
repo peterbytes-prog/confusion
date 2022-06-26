@@ -28,6 +28,7 @@ class Header extends Component {
     this.toogleNav = this.toogleNav.bind(this);
     this.toggleModal = this.toogleModal.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.logoutUser = this.logoutUser.bind(this);
   }
   toogleNav(){
     this.setState({isNavOpen:!this.state.isNavOpen});
@@ -40,7 +41,11 @@ class Header extends Component {
     //console.log(this);
     //alert(this.username.value,this.password.value,this.remember.value);
     console.log(this.username.value,);
+    this.props.loginUser({username:this.username.value, password:this.password.value})
     event.preventDefault();
+  }
+  logoutUser(){
+    this.props.logoutUser()
   }
   render() {
     return(
@@ -76,9 +81,16 @@ class Header extends Component {
               </Nav>
               <Nav className='ms-auto ml-auto' navbar>
                 <NavItem>
-                  <Button outline onClick={this.toggleModal}>
-                    <span className='fa fa-sign-in fa-lg'></span>Login
-                  </Button>
+                  {this.props.user.isAuthenticated?(
+                    <Button outline onClick={this.logoutUser}>
+                      <span className='fa fa-sign-in fa-lg'></span>Logout
+                    </Button>
+                  ):(
+                    <Button outline onClick={this.toggleModal}>
+                      <span className='fa fa-sign-in fa-lg'></span>Login
+                    </Button>
+                  )}
+
                 </NavItem>
               </Nav>
             </Collapse>

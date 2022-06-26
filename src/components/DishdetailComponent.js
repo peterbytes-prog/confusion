@@ -164,16 +164,17 @@ function RenderDish({dish}) {
 }
 
 function RenderComments({comments,postComment, dishId }) {
-
   if (comments!==undefined){
     const commentlist = comments.map((comment)=>{
-      const date = new Date(comment.date).toDateString();
+      console.log('comment',comment, comment.createAt)
+      const date = new Date(comment.createdAt).toDateString();
       return(
-        <Fade in>
-        <li key={comment._id}>
+        <Fade in key={comment._id}>
+        <ListGroupItem>
+          <p>{comment.rating}/5</p>
           <p>{comment.comment}</p>
-          <p>-- {comment.author}, {date}</p>
-        </li>
+          <p>-- {comment.author.username}, {date}</p>
+        </ListGroupItem>
         </Fade>
       )
     }
@@ -183,7 +184,7 @@ function RenderComments({comments,postComment, dishId }) {
         <Col xs={12}>
           <ul className='list-unstyled m-0'>
             <Stagger in>
-            {commentlist}
+              {commentlist}
             </Stagger>
           </ul>
         </Col>
@@ -200,7 +201,9 @@ function RenderComments({comments,postComment, dishId }) {
 }
 
 const  DishDetail = (props) => {
+
   const {dish,comments} = props;
+
   if ( props.isLoading ){
     return (
       <div className='container' >
@@ -248,7 +251,7 @@ const  DishDetail = (props) => {
                 <h4>Comments</h4>
                 <RenderComments
                   comments = { comments }
-                  postComment = { props.postComment}
+                  postComment = { props.postComment }
                   dishId = {props.dish._id }
                 />
               </Col>

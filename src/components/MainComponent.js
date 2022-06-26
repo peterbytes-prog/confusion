@@ -11,7 +11,7 @@ import Home from './HomeComponent';
 import Contact from './ContactComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { postComment, fetchDishes, fetchComments,fetchPromos,fetchLeaders,postFeedback } from '../redux/ActionCreators';
+import { loginUser, logoutUser, signupUser, postComment, fetchDishes, fetchComments,fetchPromos,fetchLeaders,postFeedback } from '../redux/ActionCreators';
 
 const mapDispatchToProps = (dispatch) =>({
   postComment:(dishId,rating,author,comment)=>dispatch(postComment(dishId,rating,author,comment)),
@@ -22,13 +22,18 @@ const mapDispatchToProps = (dispatch) =>({
   fetchLeaders: ()=>dispatch(fetchLeaders()),
   postFeedback:(values)=>dispatch(postFeedback(values)),
 
+  logoutUser: () => { dispatch(logoutUser())},
+  loginUser: (creds) => { dispatch(loginUser(creds))},
+  signupUser: (creds) => { dispatch(signupUser(creds))},
+
 })
 const mapStateToProps = state => {
   return {
     dishes:state.dishes,
     comments:state.comments,
     promotions:state.promotions,
-    leaders: state.leaders
+    leaders: state.leaders,
+    user:state.user
   }
 }
 
@@ -69,16 +74,18 @@ class MainComponent extends Component {
           dish={this.props.dishes.dishes.filter((dish) => dish._id === dishId)[0]}
           isLoading = { this.props.dishes.isLoading }
           errMess = { this.props.dishes.errMess}
-          comments = {this.props.comments.comments.filter((comment) => comment.dishId === dishId)}
+          comments = {this.props.comments.comments.filter((comment) => comment.dish === dishId)}
           commentsErrMess = { this.props.comments.errMess}
           postComment = {this.props.postComment}
 
         />
       )
     }
+    console.log(this.props.comments);
     return (
+
       <div>
-        <Header />
+        <Header user={this.props.user} loginUser={ this.props.loginUser } logoutUser={ this.props.loginUser }/>
         <TransitionGroup>
           <CSSTransition
             key={this.props.location.key} className='page' timeout={300}
